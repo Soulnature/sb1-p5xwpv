@@ -69,17 +69,19 @@ export const I131Form = () => {
         dateOfPermanentResidence: "Date of Permanent Residence",
         classOfAdmission: "Class of Admission"
       },
+      document: {
+        title: "Travel Document Information",
+        type: "Type of Document Requested",
+        previousPermitNumber: "Previous Permit Number",
+        previousPermitDate: "Previous Permit Date"
+      },
       travel: {
-        title: "Travel Information",
-        documentType: "Type of Document Requested",
-        previousPermit: "Previous Re-entry Permit",
-        permitNumber: "Previous Permit Number",
-        permitDate: "Previous Permit Date",
+        title: "Travel Plans",
         addTrip: "Add Another Trip",
         country: "Country",
         purpose: "Purpose",
-        departure: "Departure Date",
-        return: "Return Date",
+        departureDate: "Departure Date",
+        returnDate: "Return Date",
         totalTime: "Total Time Abroad",
         tripPurpose: "Overall Purpose of Trip"
       },
@@ -94,7 +96,7 @@ export const I131Form = () => {
         title: "Additional Information",
         previousApplications: "Previous Applications",
         criminalHistory: "Criminal History",
-        otherInfo: "Additional Information"
+        additionalInfo: "Additional Information"
       },
       submit: "Submit Form"
     },
@@ -122,17 +124,19 @@ export const I131Form = () => {
         dateOfPermanentResidence: "获得永久居民日期",
         classOfAdmission: "入境类别"
       },
+      document: {
+        title: "旅行证件信息",
+        type: "申请证件类型",
+        previousPermitNumber: "之前的证件号码",
+        previousPermitDate: "之前的证件日期"
+      },
       travel: {
-        title: "旅行信息",
-        documentType: "申请文件类型",
-        previousPermit: "之前的回美证",
-        permitNumber: "之前的证件号码",
-        permitDate: "之前的证件日期",
+        title: "旅行计划",
         addTrip: "添加另一次旅行",
         country: "国家",
         purpose: "目的",
-        departure: "出发日期",
-        return: "返回日期",
+        departureDate: "出发日期",
+        returnDate: "返回日期",
         totalTime: "海外停留总时间",
         tripPurpose: "旅行总体目的"
       },
@@ -147,13 +151,36 @@ export const I131Form = () => {
         title: "附加信息",
         previousApplications: "之前的申请",
         criminalHistory: "犯罪记录",
-        otherInfo: "其他信息"
+        additionalInfo: "其他信息"
       },
       submit: "提交表格"
     }
   };
 
   const currentLabels = labels[language];
+
+  const handleAddTrip = () => {
+    setFormData(prev => ({
+      ...prev,
+      plannedTrips: [...prev.plannedTrips, initialTripPlan]
+    }));
+  };
+
+  const handleTripChange = (index: number, field: keyof TripPlan, value: string) => {
+    setFormData(prev => ({
+      ...prev,
+      plannedTrips: prev.plannedTrips.map((trip, i) =>
+        i === index ? { ...trip, [field]: value } : trip
+      )
+    }));
+  };
+
+  const handleRemoveTrip = (index: number) => {
+    setFormData(prev => ({
+      ...prev,
+      plannedTrips: prev.plannedTrips.filter((_, i) => i !== index)
+    }));
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -186,22 +213,6 @@ export const I131Form = () => {
     setFormData(initialFormData);
   };
 
-  const handleAddTrip = () => {
-    setFormData(prev => ({
-      ...prev,
-      plannedTrips: [...prev.plannedTrips, initialTripPlan]
-    }));
-  };
-
-  const handleTripChange = (index: number, field: keyof TripPlan, value: string) => {
-    setFormData(prev => ({
-      ...prev,
-      plannedTrips: prev.plannedTrips.map((trip, i) =>
-        i === index ? { ...trip, [field]: value } : trip
-      )
-    }));
-  };
-
   return (
     <motion.form
       initial={{ opacity: 0, y: 20 }}
@@ -225,38 +236,423 @@ export const I131Form = () => {
                 className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
               />
             </div>
-            {/* Add other personal information fields */}
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                {currentLabels.personal.alienNumber}
+              </label>
+              <input
+                type="text"
+                value={formData.alienNumber}
+                onChange={(e) => setFormData(prev => ({ ...prev, alienNumber: e.target.value }))}
+                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                {currentLabels.personal.dateOfBirth}
+              </label>
+              <input
+                type="date"
+                value={formData.dateOfBirth}
+                onChange={(e) => setFormData(prev => ({ ...prev, dateOfBirth: e.target.value }))}
+                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                {currentLabels.personal.countryOfBirth}
+              </label>
+              <input
+                type="text"
+                value={formData.countryOfBirth}
+                onChange={(e) => setFormData(prev => ({ ...prev, countryOfBirth: e.target.value }))}
+                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                {currentLabels.personal.citizenship}
+              </label>
+              <input
+                type="text"
+                value={formData.citizenship}
+                onChange={(e) => setFormData(prev => ({ ...prev, citizenship: e.target.value }))}
+                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                {currentLabels.personal.gender}
+              </label>
+              <select
+                value={formData.gender}
+                onChange={(e) => setFormData(prev => ({ ...prev, gender: e.target.value }))}
+                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              >
+                <option value="">Select gender</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+              </select>
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                {currentLabels.personal.ssn}
+              </label>
+              <input
+                type="text"
+                value={formData.ssn}
+                onChange={(e) => setFormData(prev => ({ ...prev, ssn: e.target.value }))}
+                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              />
+            </div>
           </div>
         </div>
 
-        {/* Travel Information */}
+        {/* Contact Information */}
         <div className="space-y-6">
-          <h2 className="text-2xl font-medium">{currentLabels.travel.title}</h2>
-          
-          {formData.plannedTrips.map((trip, index) => (
-            <div key={index} className="grid grid-cols-1 md:grid-cols-2 gap-4 p-4 border border-gray-200 rounded-md">
+          <h2 className="text-2xl font-medium">{currentLabels.contact.title}</h2>
+          <div className="grid grid-cols-1 gap-4">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                {currentLabels.contact.currentAddress}
+              </label>
+              <input
+                type="text"
+                value={formData.currentAddress}
+                onChange={(e) => setFormData(prev => ({ ...prev, currentAddress: e.target.value }))}
+                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                {currentLabels.contact.mailingAddress}
+              </label>
+              <input
+                type="text"
+                value={formData.mailingAddress}
+                onChange={(e) => setFormData(prev => ({ ...prev, mailingAddress: e.target.value }))}
+                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              />
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
-                  {currentLabels.travel.country}
+                  {currentLabels.contact.phone}
                 </label>
                 <input
-                  type="text"
-                  value={trip.country}
-                  onChange={(e) => handleTripChange(index, 'country', e.target.value)}
+                  type="tel"
+                  value={formData.phone}
+                  onChange={(e) => setFormData(prev => ({ ...prev, phone: e.target.value }))}
                   className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 />
               </div>
-              {/* Add other trip fields */}
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  {currentLabels.contact.email}
+                </label>
+                <input
+                  type="email"
+                  value={formData.email}
+                  onChange={(e) => setFormData(prev => ({ ...prev, email: e.target.value }))}
+                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                />
+              </div>
             </div>
-          ))}
-          
-          <button
-            type="button"
-            onClick={handleAddTrip}
-            className="inline-flex items-center px-4 py-2 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50"
-          >
-            {currentLabels.travel.addTrip}
-          </button>
+          </div>
+        </div>
+
+        {/* Immigration Status */}
+        <div className="space-y-6">
+          <h2 className="text-2xl font-medium">{currentLabels.immigration.title}</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                {currentLabels.immigration.status}
+              </label>
+              <input
+                type="text"
+                value={formData.immigrationStatus}
+                onChange={(e) => setFormData(prev => ({ ...prev, immigrationStatus: e.target.value }))}
+                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                {currentLabels.immigration.dateOfPermanentResidence}
+              </label>
+              <input
+                type="date"
+                value={formData.dateOfPermanentResidence}
+                onChange={(e) => setFormData(prev => ({ ...prev, dateOfPermanentResidence: e.target.value }))}
+                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                {currentLabels.immigration.classOfAdmission}
+              </label>
+              <input
+                type="text"
+                value={formData.classOfAdmission}
+                onChange={(e) => setFormData(prev => ({ ...prev, classOfAdmission: e.target.value }))}
+                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              />
+            </div>
+          </div>
+        </div>
+
+        {/* Travel Document Information */}
+        <div className="space-y-6">
+          <h2 className="text-2xl font-medium">{currentLabels.document.title}</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                {currentLabels.document.type}
+              </label>
+              <select
+                value={formData.documentType}
+                onChange={(e) => setFormData(prev => ({ ...prev, documentType: e.target.value as 'reentry_permit' | 'refugee_travel_document' | 'advance_parole' }))}
+                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              >
+                <option value="reentry_permit">Re-entry Permit</option>
+                <option value="refugee_travel_document">Refugee Travel Document</option>
+                <option value="advance_parole">Advance Parole</option>
+              </select>
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                {currentLabels.document.previousPermitNumber}
+              </label>
+              <input
+                type="text"
+                value={formData.previousPermitNumber}
+                onChange={(e) => setFormData(prev => ({ ...prev, previousPermitNumber: e.target.value }))}
+                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                {currentLabels.document.previousPermitDate}
+              </label>
+              <input
+                type="date"
+                value={formData.previousPermitDate}
+                onChange={(e) => setFormData(prev => ({ ...prev, previousPermitDate: e.target.value }))}
+                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              />
+            </div>
+          </div>
+        </div>
+
+        {/* Travel Plans */}
+        <div className="space-y-6">
+          <h2 className="text-2xl font-medium">{currentLabels.travel.title}</h2>
+          <div className="space-y-6">
+            {formData.plannedTrips.map((trip, index) => (
+              <div key={index} className="p-4 border border-gray-200 rounded-lg">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                      {currentLabels.travel.country}
+                    </label>
+                    <input
+                      type="text"
+                      value={trip.country}
+                      onChange={(e) => handleTripChange(index, 'country', e.target.value)}
+                      className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                      {currentLabels.travel.purpose}
+                    </label>
+                    <input
+                      type="text"
+                      value={trip.purpose}
+                      onChange={(e) => handleTripChange(index, 'purpose', e.target.value)}
+                      className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                      {currentLabels.travel.departureDate}
+                    </label>
+                    <input
+                      type="date"
+                      value={trip.departureDate}
+                      onChange={(e) => handleTripChange(index, 'departureDate', e.target.value)}
+                      className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                      {currentLabels.travel.returnDate}
+                    </label>
+                    <input
+                      type="date"
+                      value={trip.returnDate}
+                      onChange={(e) => handleTripChange(index, 'returnDate', e.target.value)}
+                      className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    />
+                  </div>
+                </div>
+                {formData.plannedTrips.length > 1 && (
+                  <button
+                    type="button"
+                    onClick={() => handleRemoveTrip(index)}
+                    className="mt-4 text-red-600 hover:text-red-700 text-sm"
+                  >
+                    Remove Trip
+                  </button>
+                )}
+              </div>
+            ))}
+            <button
+              type="button"
+              onClick={handleAddTrip}
+              className="inline-flex items-center px-4 py-2 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50"
+            >
+              {currentLabels.travel.addTrip}
+            </button>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  {currentLabels.travel.totalTime}
+                </label>
+                <input
+                  type="text"
+                  value={formData.totalTimeAbroad}
+                  onChange={(e) => setFormData(prev => ({ ...prev, totalTimeAbroad: e.target.value }))}
+                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  {currentLabels.travel.tripPurpose}
+                </label>
+                <textarea
+                  value={formData.purposeOfTrip}
+                  onChange={(e) => setFormData(prev => ({ ...prev, purposeOfTrip: e.target.value }))}
+                  rows={4}
+                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Emergency Contact */}
+        <div className="space-y-6">
+          <h2 className="text-2xl font-medium">{currentLabels.emergency.title}</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                {currentLabels.emergency.name}
+              </label>
+              <input
+                type="text"
+                value={formData.emergencyContactName}
+                onChange={(e) => setFormData(prev => ({ ...prev, emergencyContactName: e.target.value }))}
+                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                {currentLabels.emergency.relation}
+              </label>
+              <input
+                type="text"
+                value={formData.emergencyContactRelation}
+                onChange={(e) => setFormData(prev => ({ ...prev, emergencyContactRelation: e.target.value }))}
+                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                {currentLabels.emergency.phone}
+              </label>
+              <input
+                type="tel"
+                value={formData.emergencyContactPhone}
+                onChange={(e) => setFormData(prev => ({ ...prev, emergencyContactPhone: e.target.value }))}
+                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                {currentLabels.emergency.email}
+              </label>
+              <input
+                type="email"
+                value={formData.emergencyContactEmail}
+                onChange={(e) => setFormData(prev => ({ ...prev, emergencyContactEmail: e.target.value }))}
+                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              />
+            </div>
+          </div>
+        </div>
+
+        {/* Additional Information */}
+        <div className="space-y-6">
+          <h2 className="text-2xl font-medium">{currentLabels.additional.title}</h2>
+          <div className="space-y-4">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                {currentLabels.additional.previousApplications}
+              </label>
+              <textarea
+                value={formData.previousApplications}
+                onChange={(e) => setFormData(prev => ({ ...prev, previousApplications: e.target.value }))}
+                rows={4}
+                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                {currentLabels.additional.criminalHistory}
+              </label>
+              <textarea
+                value={formData.criminalHistory}
+                onChange={(e) => setFormData(prev => ({ ...prev, criminalHistory: e.target.value }))}
+                rows={4}
+                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                {currentLabels.additional.additionalInfo}
+              </label>
+              <textarea
+                value={formData.additionalInformation}
+                onChange={(e) => setFormData(prev => ({ ...prev, additionalInformation: e.target.value }))}
+                rows={4}
+                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              />
+            </div>
+          </div>
         </div>
 
         {/* Submit Button */}

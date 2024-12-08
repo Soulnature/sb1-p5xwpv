@@ -201,6 +201,118 @@ export const I765Form = () => {
                 className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
               />
             </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                {currentLabels.personal.gender}
+              </label>
+              <select
+                value={formData.gender}
+                onChange={(e) => setFormData(prev => ({ ...prev, gender: e.target.value }))}
+                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              >
+                <option value="">Select gender</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+              </select>
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                {currentLabels.personal.maritalStatus}
+              </label>
+              <select
+                value={formData.maritalStatus}
+                onChange={(e) => setFormData(prev => ({ ...prev, maritalStatus: e.target.value }))}
+                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              >
+                <option value="">Select status</option>
+                <option value="single">Single</option>
+                <option value="married">Married</option>
+                <option value="divorced">Divorced</option>
+                <option value="widowed">Widowed</option>
+              </select>
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                {currentLabels.personal.ssn}
+              </label>
+              <input
+                type="text"
+                value={formData.ssn}
+                onChange={(e) => setFormData(prev => ({ ...prev, ssn: e.target.value }))}
+                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                {currentLabels.personal.alienNumber}
+              </label>
+              <input
+                type="text"
+                value={formData.alienNumber}
+                onChange={(e) => setFormData(prev => ({ ...prev, alienNumber: e.target.value }))}
+                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              />
+            </div>
+          </div>
+        </div>
+
+        {/* Contact Information */}
+        <div className="space-y-6">
+          <h2 className="text-2xl font-medium">{currentLabels.contact.title}</h2>
+          <div className="space-y-4">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                {currentLabels.contact.mailingAddress}
+              </label>
+              <input
+                type="text"
+                value={formData.mailingAddress}
+                onChange={(e) => setFormData(prev => ({ ...prev, mailingAddress: e.target.value }))}
+                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                {currentLabels.contact.physicalAddress}
+              </label>
+              <input
+                type="text"
+                value={formData.physicalAddress}
+                onChange={(e) => setFormData(prev => ({ ...prev, physicalAddress: e.target.value }))}
+                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              />
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  {currentLabels.contact.phone}
+                </label>
+                <input
+                  type="tel"
+                  value={formData.phone}
+                  onChange={(e) => setFormData(prev => ({ ...prev, phone: e.target.value }))}
+                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  {currentLabels.contact.email}
+                </label>
+                <input
+                  type="email"
+                  value={formData.email}
+                  onChange={(e) => setFormData(prev => ({ ...prev, email: e.target.value }))}
+                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                />
+              </div>
+            </div>
           </div>
         </div>
 
@@ -249,6 +361,78 @@ export const I765Form = () => {
                 />
               </div>
             )}
+          </div>
+        </div>
+
+        {/* Employment Information */}
+        <div className="space-y-6">
+          <h2 className="text-2xl font-medium">{currentLabels.employment.title}</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                {currentLabels.employment.education}
+              </label>
+              <input
+                type="text"
+                value={formData.education}
+                onChange={(e) => setFormData(prev => ({ ...prev, education: e.target.value }))}
+                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                {currentLabels.employment.currentEmployer}
+              </label>
+              <input
+                type="text"
+                value={formData.currentEmployer}
+                onChange={(e) => setFormData(prev => ({ ...prev, currentEmployer: e.target.value }))}
+                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              />
+            </div>
+          </div>
+        </div>
+
+        {/* Additional Information */}
+        <div className="space-y-6">
+          <h2 className="text-2xl font-medium">{currentLabels.additional.title}</h2>
+          <div className="space-y-4">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                {currentLabels.additional.criminalHistory}
+              </label>
+              <textarea
+                value={formData.criminalHistory}
+                onChange={(e) => setFormData(prev => ({ ...prev, criminalHistory: e.target.value }))}
+                rows={4}
+                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                {currentLabels.additional.immigrationViolations}
+              </label>
+              <textarea
+                value={formData.immigrationViolations}
+                onChange={(e) => setFormData(prev => ({ ...prev, immigrationViolations: e.target.value }))}
+                rows={4}
+                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                {currentLabels.additional.additionalInfo}
+              </label>
+              <textarea
+                value={formData.additionalInformation}
+                onChange={(e) => setFormData(prev => ({ ...prev, additionalInformation: e.target.value }))}
+                rows={4}
+                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              />
+            </div>
           </div>
         </div>
 

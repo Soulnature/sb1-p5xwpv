@@ -201,6 +201,254 @@ export const I129FForm = () => {
                 className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
               />
             </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                {currentLabels.petitioner.placeOfBirth}
+              </label>
+              <input
+                type="text"
+                value={formData.placeOfBirth}
+                onChange={(e) => setFormData(prev => ({ ...prev, placeOfBirth: e.target.value }))}
+                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                {currentLabels.petitioner.citizenship}
+              </label>
+              <input
+                type="text"
+                value={formData.citizenship}
+                onChange={(e) => setFormData(prev => ({ ...prev, citizenship: e.target.value }))}
+                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                {currentLabels.petitioner.ssn}
+              </label>
+              <input
+                type="text"
+                value={formData.ssn}
+                onChange={(e) => setFormData(prev => ({ ...prev, ssn: e.target.value }))}
+                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                {currentLabels.petitioner.address}
+              </label>
+              <input
+                type="text"
+                value={formData.address}
+                onChange={(e) => setFormData(prev => ({ ...prev, address: e.target.value }))}
+                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                {currentLabels.petitioner.phone}
+              </label>
+              <input
+                type="tel"
+                value={formData.phone}
+                onChange={(e) => setFormData(prev => ({ ...prev, phone: e.target.value }))}
+                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                {currentLabels.petitioner.email}
+              </label>
+              <input
+                type="email"
+                value={formData.email}
+                onChange={(e) => setFormData(prev => ({ ...prev, email: e.target.value }))}
+                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                {currentLabels.petitioner.maritalStatus}
+              </label>
+              <select
+                value={formData.maritalStatus}
+                onChange={(e) => setFormData(prev => ({ ...prev, maritalStatus: e.target.value }))}
+                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              >
+                <option value="">Select status</option>
+                <option value="single">Single</option>
+                <option value="divorced">Divorced</option>
+                <option value="widowed">Widowed</option>
+              </select>
+            </div>
+          </div>
+
+          <div>
+            <label className="flex items-center space-x-2">
+              <input
+                type="checkbox"
+                checked={formData.previousMarriages}
+                onChange={(e) => setFormData(prev => ({ ...prev, previousMarriages: e.target.checked }))}
+                className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+              />
+              <span className="text-sm text-gray-700">
+                {currentLabels.petitioner.previousMarriages}
+              </span>
+            </label>
+            {formData.previousMarriages && (
+              <div className="mt-4">
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  {currentLabels.petitioner.previousMarriageDetails}
+                </label>
+                <textarea
+                  value={formData.previousMarriageDetails}
+                  onChange={(e) => setFormData(prev => ({ ...prev, previousMarriageDetails: e.target.value }))}
+                  rows={4}
+                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                />
+              </div>
+            )}
+          </div>
+        </div>
+
+        {/* Beneficiary Information */}
+        <div className="space-y-6">
+          <h2 className="text-2xl font-medium">{currentLabels.beneficiary.title}</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                {currentLabels.beneficiary.name}
+              </label>
+              <input
+                type="text"
+                value={formData.beneficiaryName}
+                onChange={(e) => setFormData(prev => ({ ...prev, beneficiaryName: e.target.value }))}
+                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                {currentLabels.beneficiary.dateOfBirth}
+              </label>
+              <input
+                type="date"
+                value={formData.beneficiaryDateOfBirth}
+                onChange={(e) => setFormData(prev => ({ ...prev, beneficiaryDateOfBirth: e.target.value }))}
+                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                {currentLabels.beneficiary.placeOfBirth}
+              </label>
+              <input
+                type="text"
+                value={formData.beneficiaryPlaceOfBirth}
+                onChange={(e) => setFormData(prev => ({ ...prev, beneficiaryPlaceOfBirth: e.target.value }))}
+                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                {currentLabels.beneficiary.citizenship}
+              </label>
+              <input
+                type="text"
+                value={formData.beneficiaryCitizenship}
+                onChange={(e) => setFormData(prev => ({ ...prev, beneficiaryCitizenship: e.target.value }))}
+                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                {currentLabels.beneficiary.address}
+              </label>
+              <input
+                type="text"
+                value={formData.beneficiaryAddress}
+                onChange={(e) => setFormData(prev => ({ ...prev, beneficiaryAddress: e.target.value }))}
+                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                {currentLabels.beneficiary.phone}
+              </label>
+              <input
+                type="tel"
+                value={formData.beneficiaryPhone}
+                onChange={(e) => setFormData(prev => ({ ...prev, beneficiaryPhone: e.target.value }))}
+                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                {currentLabels.beneficiary.email}
+              </label>
+              <input
+                type="email"
+                value={formData.beneficiaryEmail}
+                onChange={(e) => setFormData(prev => ({ ...prev, beneficiaryEmail: e.target.value }))}
+                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                {currentLabels.beneficiary.maritalStatus}
+              </label>
+              <select
+                value={formData.beneficiaryMaritalStatus}
+                onChange={(e) => setFormData(prev => ({ ...prev, beneficiaryMaritalStatus: e.target.value }))}
+                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              >
+                <option value="">Select status</option>
+                <option value="single">Single</option>
+                <option value="divorced">Divorced</option>
+                <option value="widowed">Widowed</option>
+              </select>
+            </div>
+          </div>
+
+          <div>
+            <label className="flex items-center space-x-2">
+              <input
+                type="checkbox"
+                checked={formData.beneficiaryPreviousMarriages}
+                onChange={(e) => setFormData(prev => ({ ...prev, beneficiaryPreviousMarriages: e.target.checked }))}
+                className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+              />
+              <span className="text-sm text-gray-700">
+                {currentLabels.beneficiary.previousMarriages}
+              </span>
+            </label>
+            {formData.beneficiaryPreviousMarriages && (
+              <div className="mt-4">
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  {currentLabels.beneficiary.previousMarriageDetails}
+                </label>
+                <textarea
+                  value={formData.beneficiaryPreviousMarriageDetails}
+                  onChange={(e) => setFormData(prev => ({ ...prev, beneficiaryPreviousMarriageDetails: e.target.value }))}
+                  rows={4}
+                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                />
+              </div>
+            )}
           </div>
         </div>
 
@@ -244,6 +492,86 @@ export const I129FForm = () => {
                   {currentLabels.relationship.inPersonMeeting}
                 </label>
               </div>
+            </div>
+
+            {formData.inPersonMeeting && (
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  {currentLabels.relationship.meetingDetails}
+                </label>
+                <textarea
+                  value={formData.meetingDetails}
+                  onChange={(e) => setFormData(prev => ({ ...prev, meetingDetails: e.target.value }))}
+                  rows={4}
+                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                />
+              </div>
+            )}
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                {currentLabels.relationship.proposalDate}
+              </label>
+              <input
+                type="date"
+                value={formData.proposalDate}
+                onChange={(e) => setFormData(prev => ({ ...prev, proposalDate: e.target.value }))}
+                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                {currentLabels.relationship.proposalDetails}
+              </label>
+              <textarea
+                value={formData.proposalDetails}
+                onChange={(e) => setFormData(prev => ({ ...prev, proposalDetails: e.target.value }))}
+                rows={4}
+                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              />
+            </div>
+          </div>
+        </div>
+
+        {/* Additional Information */}
+        <div className="space-y-6">
+          <h2 className="text-2xl font-medium">{currentLabels.additional.title}</h2>
+          <div className="space-y-4">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                {currentLabels.additional.criminalHistory}
+              </label>
+              <textarea
+                value={formData.criminalHistory}
+                onChange={(e) => setFormData(prev => ({ ...prev, criminalHistory: e.target.value }))}
+                rows={4}
+                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                {currentLabels.additional.immigrationViolations}
+              </label>
+              <textarea
+                value={formData.immigrationViolations}
+                onChange={(e) => setFormData(prev => ({ ...prev, immigrationViolations: e.target.value }))}
+                rows={4}
+                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                {currentLabels.additional.additionalInfo}
+              </label>
+              <textarea
+                value={formData.additionalInformation}
+                onChange={(e) => setFormData(prev => ({ ...prev, additionalInformation: e.target.value }))}
+                rows={4}
+                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              />
             </div>
           </div>
         </div>

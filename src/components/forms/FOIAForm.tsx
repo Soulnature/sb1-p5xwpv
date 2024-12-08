@@ -26,6 +26,7 @@ export const FOIAForm = () => {
 
   const labels = {
     en: {
+      title: "FOIA Request Form",
       requester: {
         title: "Requester Information",
         name: "Full Legal Name",
@@ -52,6 +53,7 @@ export const FOIAForm = () => {
       submit: "Submit Request"
     },
     zh: {
+      title: "FOIA申请表",
       requester: {
         title: "申请人信息",
         name: "法定全名",
@@ -130,6 +132,7 @@ export const FOIAForm = () => {
               </label>
               <input
                 type="text"
+                required
                 value={formData.requesterName}
                 onChange={(e) => setFormData(prev => ({ ...prev, requesterName: e.target.value }))}
                 className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
@@ -142,6 +145,7 @@ export const FOIAForm = () => {
               </label>
               <input
                 type="date"
+                required
                 value={formData.dateOfBirth}
                 onChange={(e) => setFormData(prev => ({ ...prev, dateOfBirth: e.target.value }))}
                 className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
@@ -154,6 +158,7 @@ export const FOIAForm = () => {
               </label>
               <input
                 type="text"
+                required
                 value={formData.placeOfBirth}
                 onChange={(e) => setFormData(prev => ({ ...prev, placeOfBirth: e.target.value }))}
                 className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
@@ -166,8 +171,48 @@ export const FOIAForm = () => {
               </label>
               <input
                 type="text"
+                required
                 value={formData.alienNumber}
                 onChange={(e) => setFormData(prev => ({ ...prev, alienNumber: e.target.value }))}
+                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              />
+            </div>
+
+            <div className="md:col-span-2">
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                {currentLabels.requester.mailingAddress}
+              </label>
+              <input
+                type="text"
+                required
+                value={formData.mailingAddress}
+                onChange={(e) => setFormData(prev => ({ ...prev, mailingAddress: e.target.value }))}
+                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                {currentLabels.requester.phone}
+              </label>
+              <input
+                type="tel"
+                required
+                value={formData.phone}
+                onChange={(e) => setFormData(prev => ({ ...prev, phone: e.target.value }))}
+                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                {currentLabels.requester.email}
+              </label>
+              <input
+                type="email"
+                required
+                value={formData.email}
+                onChange={(e) => setFormData(prev => ({ ...prev, email: e.target.value }))}
                 className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
               />
             </div>
@@ -183,6 +228,7 @@ export const FOIAForm = () => {
                 {currentLabels.request.recordType}
               </label>
               <select
+                required
                 value={formData.recordType}
                 onChange={(e) => setFormData(prev => ({ ...prev, recordType: e.target.value }))}
                 className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
@@ -196,11 +242,39 @@ export const FOIAForm = () => {
 
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">
+                {currentLabels.request.timeframe}
+              </label>
+              <input
+                type="text"
+                required
+                value={formData.timeframeCovered}
+                onChange={(e) => setFormData(prev => ({ ...prev, timeframeCovered: e.target.value }))}
+                placeholder="e.g., 2010-2023"
+                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
                 {currentLabels.request.specificInfo}
               </label>
               <textarea
+                required
                 value={formData.specificInformation}
                 onChange={(e) => setFormData(prev => ({ ...prev, specificInformation: e.target.value }))}
+                rows={4}
+                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                {currentLabels.request.purpose}
+              </label>
+              <textarea
+                required
+                value={formData.purposeOfRequest}
+                onChange={(e) => setFormData(prev => ({ ...prev, purposeOfRequest: e.target.value }))}
                 rows={4}
                 className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
               />
@@ -212,9 +286,23 @@ export const FOIAForm = () => {
         <div className="space-y-6">
           <h2 className="text-2xl font-medium">{currentLabels.verification.title}</h2>
           <div className="space-y-4">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                {currentLabels.verification.proofOfIdentity}
+              </label>
+              <textarea
+                required
+                value={formData.proofOfIdentity}
+                onChange={(e) => setFormData(prev => ({ ...prev, proofOfIdentity: e.target.value }))}
+                rows={4}
+                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              />
+            </div>
+
             <div className="flex items-center space-x-2">
               <input
                 type="checkbox"
+                required
                 checked={formData.consentToRelease}
                 onChange={(e) => setFormData(prev => ({ ...prev, consentToRelease: e.target.checked }))}
                 className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"

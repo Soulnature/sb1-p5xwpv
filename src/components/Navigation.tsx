@@ -15,6 +15,7 @@ const Logo = () => (
   </div>
 );
 
+// Rest of the Navigation component code remains the same
 export const Navigation = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isImmigrationOpen, setIsImmigrationOpen] = useState(false);

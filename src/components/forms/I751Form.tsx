@@ -177,7 +177,7 @@ export const I751Form = () => {
                 className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
               />
             </div>
-            
+
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">
                 {currentLabels.personal.alienNumber}
@@ -189,7 +189,7 @@ export const I751Form = () => {
                 className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
               />
             </div>
-            
+
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">
                 {currentLabels.personal.dateOfBirth}
@@ -201,7 +201,7 @@ export const I751Form = () => {
                 className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
               />
             </div>
-            
+
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">
                 {currentLabels.personal.placeOfBirth}
@@ -210,6 +210,42 @@ export const I751Form = () => {
                 type="text"
                 value={formData.placeOfBirth}
                 onChange={(e) => setFormData(prev => ({ ...prev, placeOfBirth: e.target.value }))}
+                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              />
+            </div>
+
+            <div className="md:col-span-2">
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                {currentLabels.personal.currentAddress}
+              </label>
+              <input
+                type="text"
+                value={formData.currentAddress}
+                onChange={(e) => setFormData(prev => ({ ...prev, currentAddress: e.target.value }))}
+                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                {currentLabels.personal.phone}
+              </label>
+              <input
+                type="tel"
+                value={formData.phone}
+                onChange={(e) => setFormData(prev => ({ ...prev, phone: e.target.value }))}
+                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                {currentLabels.personal.email}
+              </label>
+              <input
+                type="email"
+                value={formData.email}
+                onChange={(e) => setFormData(prev => ({ ...prev, email: e.target.value }))}
                 className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
               />
             </div>
@@ -231,7 +267,7 @@ export const I751Form = () => {
                 className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
               />
             </div>
-            
+
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">
                 {currentLabels.marriage.spouseDateOfBirth}
@@ -243,6 +279,57 @@ export const I751Form = () => {
                 className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
               />
             </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                {currentLabels.marriage.marriageDate}
+              </label>
+              <input
+                type="date"
+                value={formData.marriageDate}
+                onChange={(e) => setFormData(prev => ({ ...prev, marriageDate: e.target.value }))}
+                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                {currentLabels.marriage.marriagePlace}
+              </label>
+              <input
+                type="text"
+                value={formData.marriagePlace}
+                onChange={(e) => setFormData(prev => ({ ...prev, marriagePlace: e.target.value }))}
+                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              />
+            </div>
+          </div>
+
+          <div>
+            <label className="flex items-center space-x-2">
+              <input
+                type="checkbox"
+                checked={formData.previousMarriages}
+                onChange={(e) => setFormData(prev => ({ ...prev, previousMarriages: e.target.checked }))}
+                className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+              />
+              <span className="text-sm text-gray-700">
+                {currentLabels.marriage.previousMarriages}
+              </span>
+            </label>
+            {formData.previousMarriages && (
+              <div className="mt-4">
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  {currentLabels.marriage.previousMarriageDetails}
+                </label>
+                <textarea
+                  value={formData.previousMarriageDetails}
+                  onChange={(e) => setFormData(prev => ({ ...prev, previousMarriageDetails: e.target.value }))}
+                  rows={4}
+                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                />
+              </div>
+            )}
           </div>
         </div>
 
@@ -272,6 +359,127 @@ export const I751Form = () => {
               <label className="text-sm text-gray-700">
                 {currentLabels.evidence.jointLeases}
               </label>
+            </div>
+
+            <div className="flex items-center space-x-2">
+              <input
+                type="checkbox"
+                checked={formData.jointUtilities}
+                onChange={(e) => setFormData(prev => ({ ...prev, jointUtilities: e.target.checked }))}
+                className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+              />
+              <label className="text-sm text-gray-700">
+                {currentLabels.evidence.jointUtilities}
+              </label>
+            </div>
+
+            <div className="flex items-center space-x-2">
+              <input
+                type="checkbox"
+                checked={formData.jointInsurance}
+                onChange={(e) => setFormData(prev => ({ ...prev, jointInsurance: e.target.checked }))}
+                className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+              />
+              <label className="text-sm text-gray-700">
+                {currentLabels.evidence.jointInsurance}
+              </label>
+            </div>
+
+            <div className="flex items-center space-x-2">
+              <input
+                type="checkbox"
+                checked={formData.jointTaxReturns}
+                onChange={(e) => setFormData(prev => ({ ...prev, jointTaxReturns: e.target.checked }))}
+                className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+              />
+              <label className="text-sm text-gray-700">
+                {currentLabels.evidence.jointTaxReturns}
+              </label>
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                {currentLabels.evidence.otherEvidence}
+              </label>
+              <textarea
+                value={formData.otherEvidence}
+                onChange={(e) => setFormData(prev => ({ ...prev, otherEvidence: e.target.value }))}
+                rows={4}
+                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              />
+            </div>
+          </div>
+        </div>
+
+        {/* Children Information */}
+        <div className="space-y-6">
+          <h2 className="text-2xl font-medium">{currentLabels.children.title}</h2>
+          <div>
+            <label className="flex items-center space-x-2">
+              <input
+                type="checkbox"
+                checked={formData.hasChildren}
+                onChange={(e) => setFormData(prev => ({ ...prev, hasChildren: e.target.checked }))}
+                className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+              />
+              <span className="text-sm text-gray-700">
+                {currentLabels.children.hasChildren}
+              </span>
+            </label>
+            {formData.hasChildren && (
+              <div className="mt-4">
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  {currentLabels.children.childrenDetails}
+                </label>
+                <textarea
+                  value={formData.childrenDetails}
+                  onChange={(e) => setFormData(prev => ({ ...prev, childrenDetails: e.target.value }))}
+                  rows={4}
+                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                />
+              </div>
+            )}
+          </div>
+        </div>
+
+        {/* Additional Information */}
+        <div className="space-y-6">
+          <h2 className="text-2xl font-medium">{currentLabels.additional.title}</h2>
+          <div className="space-y-4">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                {currentLabels.additional.criminalHistory}
+              </label>
+              <textarea
+                value={formData.criminalHistory}
+                onChange={(e) => setFormData(prev => ({ ...prev, criminalHistory: e.target.value }))}
+                rows={4}
+                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                {currentLabels.additional.immigrationViolations}
+              </label>
+              <textarea
+                value={formData.immigrationViolations}
+                onChange={(e) => setFormData(prev => ({ ...prev, immigrationViolations: e.target.value }))}
+                rows={4}
+                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                {currentLabels.additional.additionalInfo}
+              </label>
+              <textarea
+                value={formData.additionalInformation}
+                onChange={(e) => setFormData(prev => ({ ...prev, additionalInformation: e.target.value }))}
+                rows={4}
+                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              />
             </div>
           </div>
         </div>
